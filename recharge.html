@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recharge Your Account</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            min-height: 120vh;
+            flex-direction: column;
+            background-color: #f9f9f9; /* Light background color */
+            color: #333; /* Dark text color */
+        }
+
+        .recharge-container {
+            max-width: 500px; /* Max width for better readability */
+            margin: auto; /* Center the container */
+            padding: 20px; /* Padding around the content */
+            background: white; /* White background for the form */
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            text-align: center; /* Centered text */
+            margin-top: 20px;
+            
+        }
+        .form-group input, .form-group select {
+            width: 70%; /* Full width for input fields */
+            padding: 10px; /* Larger padding for bigger input fields */
+            border-radius: 8px; /* Rounded input fields */
+            border: 1px solid #ccc;
+            font-size: 18px; /* Larger font size for better readability */
+        }
+
+        h2 {
+            margin-bottom: 20px; /* Space below the heading */
+        }
+
+        label {
+            display: block; /* Block display for labels */
+            margin-bottom: 10px; /* Space below label */
+            font-weight: bold; /* Bold font for labels */
+        }
+
+        input[type="number"] {
+            width: calc(90% - 20px); /* Full width minus padding */
+            padding: 10px; /* Padding inside input */
+            margin-bottom: 20px; /* Space below input */
+            border: 1px solid #ccc; /* Light border */
+            border-radius: 8px; /* Rounded corners */
+            font-size: 16px; /* Font size for input */
+        }
+
+        .amount-options {
+            display: flex; /* Flexbox for horizontal buttons */
+            justify-content: space-between; /* Space between buttons */
+            margin-bottom: 20px; /* Space below amount options */
+        }
+
+        .amount-button {
+            flex: 1; /* Flex-grow for equal size */
+            margin: 0 5px; /* Margin between buttons */
+            padding: 10px; /* Padding inside buttons */
+           
+            color: rgb(0, 0, 0); /* White text */
+            border: none; /* No border */
+            border-radius: 8px; /* Rounded corners */
+            cursor: pointer; /* Pointer cursor on hover */
+            font-size: 16px; /* Font size for buttons */
+            transition: background-color 0.3s; /* Transition effect */
+        }
+
+        .amount-button:hover {
+           color: green;
+        }
+
+        .minimum-amount {
+            margin-top: 10px; /* Space above minimum amount text */
+            color: #6c757d; /* Gray color for minimum amount text */
+        }
+
+        .gcash-qr-container {
+            margin-top: 20px; /* Space above QR code */
+        }
+
+        img {
+            width: 100%; /* Full width for the QR code */
+            height: auto; /* Maintain aspect ratio */
+            max-width: 200px; /* Max width for image */
+            margin: 0 auto; /* Center the image */
+        }
+
+        .recharge-button {
+            margin-top: 20px; /* Space above recharge button */
+            padding: 10px 20px; /* Padding for button */
+            background-color: #28a745; /* Green button color */
+            color: #fff; /* White text */
+            border: none; /* No border */
+            border-radius: 4px; /* Rounded corners */
+            cursor: pointer; /* Pointer cursor */
+            font-size: 16px; /* Font size for button */
+            transition: background-color 0.3s; /* Transition effect */
+        }
+
+        .recharge-button:hover {
+            background-color: #218838; /* Darker green on hover */
+        }
+        .footer {
+            background-color: hotpink;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            border-radius: 15px;
+        }
+        
+        .footer-icons {
+            display: flex;
+            justify-content: space-around;
+        }
+        
+        .footer-icon {
+            width: 40px; /* Adjust size as needed */
+            height: 40px; /* Adjust size as needed */
+        }
+        #backgroundVideo {
+            position: fixed;
+            top: 0;
+            left: 0;
+            min-width: 100%;
+            min-height: 100%;
+            z-index: -1; /* Send the video to the background */
+            object-fit: cover; /* Ensure the video covers the entire screen */
+            filter: brightness(20%);  
+        }        
+            </style>
+        </head>
+        <body>
+            <video autoplay muted loop id="backgroundVideo">
+                <source src="video-bg.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+
+            <div class="recharge-container">
+                <h2>Recharge Your Account</h2>
+        
+                <label for="rechargeAmount">Enter Amount to Recharge:</label>
+                <input type="number" id="rechargeAmount" name="rechargeAmount" placeholder="₱" min="50"> <!-- Minimum attribute for validation -->
+        
+                <!-- Predefined Amount Buttons -->
+                <div class="amount-options">
+                    <button class="amount-button" onclick="setRechargeAmount(300)">₱300</button>
+                    <button class="amount-button" onclick="setRechargeAmount(700)">₱700</button>
+                    <button class="amount-button" onclick="setRechargeAmount(1000)">₱1000</button>
+                    <button class="amount-button" onclick="setRechargeAmount(1500)">₱1500</button>
+                    <button class="amount-button" onclick="setRechargeAmount(2000)">₱2000</button>
+                </div>
+        
+                <!-- Minimum recharge amount information -->
+                <div class="minimum-amount">
+                    Minimum recharge amount is ₱300.
+                </div>
+        
+                <!-- Withdrawal Method -->
+                <div class="form-group">
+                    <label for="rechargeMethod">Withdrawal Method:</label>
+                    <select id="rechargeMethod" required>
+                        <option value="" disabled selected>Select a method</option>
+                        <option value="paypal">PayPal</option>
+                        <option value="ewallet">GCash</option>
+                    </select>
+                </div>
+        
+                <!-- GCash QR Code Section -->
+                <div class="gcash-qr-container">
+                    <p>Scan the QR code below to recharge your account via GCash:</p>
+                    <img src="gcash-qr-code.png" alt="GCash QR Code"> <!-- Replace with your actual QR code image -->
+                </div>
+        
+                <!-- Optional: Direct Link to GCash Website -->
+                <p>Or click <a href="https://yourwebsite.com/path/to/your-qr-code.png" target="_blank">here</a> to go to your GCash QR code for payment.</p>
+        
+                <!-- Recharge Button -->
+                <button class="recharge-button" onclick="completeRecharge()">Complete Recharge</button>
+            <div class="reset-container" onclick="resetBalance()" style="cursor: pointer;">
+                <img src="reset.png" alt="Reset Balance" class="reset-icon">
+            </div>
+            <div id="responseMessage"></div>
+        </div>
+            <style>
+                .reset-container {
+                    display: inline-block; /* Aligns it with other elements */
+                    margin: 30px; /* Adds some space around it */
+                    margin-top: 40px;
+                    cursor: pointer; /* Changes the cursor to indicate clickability */
+                }
+                .reset-icon {
+                    width: 20px; /* Set the desired width */
+                    height: auto; /* Maintain aspect ratio */
+                }
+            </style>
+            
+      
+       
+
+            <script>
+                function resetBalance() {
+                    localStorage.setItem('currentBalance', '0.00'); // Set balance to 0
+                    alert('Your account balance has been reset to zero.');
+                    // Optionally, you can update the displayed balance on your page
+                    document.querySelector('.account-balance h3').innerText = '₱00.00';
+                }
+                
+                // Call this function when needed, for example when a reset button is clicked
+                // <button onclick="resetBalance()">Reset Balance</button>
+                
+            </script>
+        
+            <script>
+                let currentBalance = parseFloat(localStorage.getItem('currentBalance')) || 0; // Retrieve current balance
+                
+                function setRechargeAmount(amount) {
+                    document.getElementById('rechargeAmount').value = amount;
+                }
+                
+                function completeRecharge() {
+                    const rechargeInput = document.getElementById('rechargeAmount');
+                    const rechargeAmount = parseFloat(rechargeInput.value);
+                    const method = document.getElementById('rechargeMethod').value; // Get the selected method
+                
+                    // Validate the recharge amount
+                    if (isNaN(rechargeAmount) || rechargeAmount < 50) {
+                        alert("Please enter a valid recharge amount (minimum ₱50).");
+                        return;
+                    }
+                
+                    // Update the current balance
+                    currentBalance += rechargeAmount;
+                
+                    // Save the updated balance to localStorage
+                    localStorage.setItem('currentBalance', currentBalance.toFixed(2));
+                
+                    // Create a new record
+                    const rechargeRecord = {
+                        date: new Date().toLocaleString(), // Get the current date and time
+                        amount: rechargeAmount,
+                        method: method
+                    };
+                
+                    // Load existing records or create an empty array if none exist
+                    const rechargeRecords = JSON.parse(localStorage.getItem('rechargeRecords')) || [];
+                    rechargeRecords.push(rechargeRecord); // Add the new record
+                
+                    // Save updated records back to localStorage
+                    localStorage.setItem('rechargeRecords', JSON.stringify(rechargeRecords));
+                
+                    // Log the records to the console for debugging
+                    console.log("Recharge Records: ", rechargeRecords);
+                
+                    // Notify user of success
+                    alert(`Recharge successful! Your new balance is ₱${currentBalance.toFixed(2)}`);
+                    rechargeInput.value = ''; // Clear the input field after recharge
+                }
+                </script>
+  
+  
+    <footer class="footer">
+        <div class="footer-icons">
+            <a href="dashboard.html" class="footer-item">
+                <img src="home-icon.png" alt="Home" class="footer-icon">
+                <span class="icon-label">Home</span>
+            </a>
+            <a href="invest.html" class="footer-item">
+                <img src="invest-icon.png" alt="Invest" class="footer-icon">
+                <span class="icon-label">Invest</span>
+            </a>
+            <a href="teams.html" class="footer-item">
+                <img src="team-icon.png" alt="Teams" class="footer-icon">
+                <span class="icon-label">Teams</span>
+            </a>
+            <a href="mine.html" id="logoutLink" class="footer-item">
+                <img src="mine-icon.png" alt="Mine" class="footer-icon">
+                <span class="icon-label">Mine</span>
+            </a>
+        </div>
+    </footer>
+    <style>
+        .footer {
+            background-color: rgba(0, 128, 0, 0.3); /* Semi-transparent green for glass effect */
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            border-radius: 15px;
+            backdrop-filter: blur(10px); /* Frosted glass blur effect */
+            box-shadow: 0 4px 10px rgba(0, 255, 0, 0.4), 0 2px 20px rgba(0, 128, 0, 0.6); /* Green glowing effect */
+            border: 1px solid rgba(255, 255, 255, 0.2); /* Light border for glass effect */
+            transition: box-shadow 0.3s ease; /* Smooth transition effect */
+        }
+        
+        .footer:hover {
+            box-shadow: 0 6px 15px rgba(0, 255, 0, 0.6), 0 4px 25px rgba(0, 128, 0, 0.8); /* Brighter shine on hover */
+        }
+        
+        .footer-icons {
+            display: flex;
+            justify-content: space-around;
+        }
+        
+        .footer-item {
+            display: flex;
+            flex-direction: column; /* Stack icon and label vertically */
+            align-items: center; /* Center the icon and label */
+            text-decoration: none; /* Remove underline from links */
+        }
+        
+        .footer-icon {
+            width: 40px;
+            height: 40px;
+            filter: brightness(0) invert(1); /* Make the icon white */
+        }
+        
+        .icon-label {
+            color: white; /* White text for the labels */
+            font-size: 14px; /* Adjust size of the label text */
+            margin-top: 5px; /* Space between icon and label */
+        }
+    </style>
+    
+
+</body>
+</html>

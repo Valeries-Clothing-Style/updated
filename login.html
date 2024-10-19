@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VeilVest Login</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif; /* Set a font for the body */
+            justify-content: center;
+            align-items: center;
+            height: 100%; /* Full viewport height */
+            margin: 0; /* Remove default margin */
+            text-align: center;
+        }
+        
+        .login-form {
+            background: rgba(255, 255, 255, 0.2); /* Translucent background */
+            -webkit-backdrop-filter: blur(10px); /* Apply blur effect */
+            backdrop-filter: blur(5px); /* Support for Safari */
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.3); /* Light border to enhance glass effect */
+            box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1); /* Subtle shadow for depth */
+            width: 80%;
+            max-width: 400px;
+            margin: 0 auto; /* Centering form */
+        }
+
+        .app-title {
+            color: #00ffcc; /* Bright, tech-inspired color */
+            font-size: 36px; /* Adjust font size */
+            margin-bottom: 30px;
+            text-align: center; /* Center the title */
+            font-family: 'Roboto Mono', monospace; /* Use the Roboto Mono font */
+            text-transform: uppercase; /* Uppercase letters for a stronger impact */
+            letter-spacing: 2px; /* Space between letters for a tech look */
+            text-shadow: 
+                1px 2px 3px rgba(0, 0, 0, 0.7), /* Strong shadow to the right and down */
+                -1px -2px 6px rgba(0, 0, 0, 0.7); /* Strong shadow to the left and up */
+        }
+
+        .form-group {
+            width: 100%;
+            margin-bottom: 10px; /* Space between input fields */
+            margin-left: -10px;
+            display: flex; /* Use flexbox for alignment */
+            align-items: center; /* Center items vertically */
+            border: 1px solid rgba(0, 209, 0, 0.5); /* Semi-transparent border for glass effect */
+            border-radius: 10px; /* Rounded corners */
+            padding: 10px; /* Padding around the content */
+            backdrop-filter: blur(10px); /* Blurring the background */
+            background-color: rgba(255, 255, 255, 0.1); /* Slightly transparent white background */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Soft shadow for depth */
+            transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+        }
+        
+        .form-group:hover {
+            background-color: rgba(255, 255, 255, 0.2); /* Darker on hover */
+        }
+        
+        .icon {
+            width: 20px; /* Icon size */
+            height: 20px; /* Icon size */
+            margin-right: 10px; /* Space between icon and input */
+        }
+        
+        input {
+            border: none; /* No border for the input */
+            flex: 1; /* Allow input to grow and fill available space */
+            font-size: 16px; /* Font size for input text */
+            outline: none; /* No outline on focus */
+            color: rgb(255, 255, 255);
+            background-color: transparent; /* Transparent background */
+            text-shadow: 
+            0px 0px 3px rgba(0, 0, 0, 0.7), /* Strong shadow to the right and down */
+            0 0 1px rgba(0, 0, 0, 0.7); /* Strong shadow to the left and up */
+        }
+            
+        
+        
+        input::placeholder {
+            color: #dbd7d7; /* Placeholder text color */
+            background-color: transparent;
+            
+        }
+
+        
+        .login-btn {
+             width: 70%; /* Ensures button occupies the full width */
+            background-color: rgba(255, 255, 255, 0.1); /* Slightly transparent white for glass effect */
+            color: #fff; /* Text color */
+            border: 1px solid rgba(255, 255, 255, 0.3); /* Semi-transparent white border */
+            padding: 10px; /* Padding for better button appearance */
+            font-size: 18px; /* Font size */
+            border-radius: 25px; /* Rounded corners */
+            cursor: pointer; /* Pointer cursor on hover */
+            margin-top: 20px; /* Space above button */
+            backdrop-filter: blur(10px); /* Blurring the background behind the button */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
+            transition: background-color 0.3s, transform 0.3s; /* Smooth transition effect */
+        }
+        
+        .login-btn:hover {
+            background-color: rgba(255, 255, 255, 0.2); /* Darker on hover */
+            transform: scale(1.05); /* Slightly increase size on hover */
+        }
+        .registration-link {
+                display: block;
+                margin-top: 20px;
+                color: rgb(202, 202, 202);
+                text-decoration: none;
+                text-shadow: 
+                1px 2px 3px rgba(0, 0, 0, 0.7), /* Strong shadow to the right and down */
+                -1px -2px 6px rgba(0, 0, 0, 0.7); /* Strong shadow to the left and up */
+            }        
+            .registration-link:hover {
+                color: rgb(0, 205, 0);
+            }
+            #forgotPasswordLink {
+                color: rgb(34, 34, 246); /* Change 'blue' to your desired color */
+                text-shadow: 
+                1px 2px 3px rgba(0, 0, 0, 0.7), /* Strong shadow to the right and down */
+                -1px -2px 6px rgba(0, 0, 0, 0.7); /* Strong shadow to the left and up */
+            }        
+           
+            #forgotPasswordLink:hover {
+                color: red; /* Change to your desired hover color */
+                text-shadow: 
+                1px 2px 3px rgba(0, 0, 0, 0.7), /* Strong shadow to the right and down */
+                -1px -2px 6px rgba(0, 0, 0, 0.7); /* Strong shadow to the left and up */
+            }
+            .save-password label{
+                color: rgb(201, 201, 201);
+            }              
+            .save-password-group{
+                color: white;
+            } 
+            
+
+            
+            
+        #message {
+            color: red; /* Default color for message */
+            text-align: center; /* Center the text */
+            margin-top: 10px; /* Space above message */
+            height: 40px; /* Fixed height to prevent layout shifts */
+            overflow: hidden; /* Hide overflow to keep layout neat */
+        }    
+        @media (max-width: 600px) {
+            .registration-container {
+                width: 90%;
+            }
+        
+        }
+        @keyframes shake {
+            0% { transform: translate(1px, 0); }
+            25% { transform: translate(-1px, 0); }
+            50% { transform: translate(1px, 0); }
+            75% { transform: translate(-1px, 0); }
+            100% { transform: translate(0, 0); }
+        }
+        .shake {
+            animation: shake 0.5s;
+        }
+               /* Make the video cover the entire screen */
+#backgroundVideo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -1; /* Send the video to the background */
+    object-fit: cover; /* Ensure the video covers the entire screen */
+    filter: brightness(20%);  
+}     
+    </style>
+
+
+</head>
+<body>
+
+    <video autoplay muted loop id="backgroundVideo">
+        <source src="video-bg.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    
+    <div class="login-container">
+        <h1 class="app-title">VeilVest</h1>
+    
+        <form id="loginForm" class="login-form">
+            <div class="form-group">
+                <img src="phone-icon.png" alt="phone icon" class="icon">
+                <input type="text" id="login-phone" placeholder="Please enter phone number" required>
+            </div>
+            <div class="form-group">
+                <img src="password-icon.png" alt="password icon" class="icon">
+                <input type="password" id="login-password" placeholder="Please enter your password" required>
+            </div>
+    
+            <div class="save-password-group">
+                <input type="checkbox" id="save-password">
+                <label for="save-password">Save Password</label>
+            </div>
+          
+    
+            <button type="submit" class="login-btn">Submit</button>
+            <p><a href="reset-password.html" id="forgotPasswordLink">Forgot Password?</a></p> 
+            <div>
+                
+                <a href="index.html" class="registration-link">Register Account</a>
+            </div>
+            <div id="registerMessage" style="display: none; color: red;">You must register a phone number before logging in!</div>
+            <div id="successMessage" style="display: none; color: green;">Login successful! Redirecting...</div>
+
+        </form>
+    
+    <script>
+        // When the login form is submitted
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission behavior
+    
+            // Get the phone number and password values from the input fields
+            const phoneNumber = document.getElementById('login-phone').value;
+            const password = document.getElementById('login-password').value;
+    
+            // Save the phone number (registered number) to localStorage
+            localStorage.setItem('registeredNumber', phoneNumber);
+    
+            // For demonstration purposes, you can redirect the user to the "Mine" page
+            // after successfully logging in.
+            window.location.href = 'mine.html'; // Redirect to "Mine" page
+        });
+    </script>
+
+
+    
+    <script>
+        // Check if user is logged in and session is valid
+        const oneHour = 60 * 60 * 1000; // 1 hour in milliseconds
+        const loggedInUser = localStorage.getItem('loggedInUser');
+        const loginTime = localStorage.getItem('loginTime');
+    
+        if (loggedInUser && loginTime) {
+            const currentTime = new Date().getTime();
+            if (currentTime - loginTime > oneHour) {
+                // If more than 1 hour has passed, log the user out
+                localStorage.removeItem('loggedInUser');
+                localStorage.removeItem('loginTime');
+                window.location.href = 'login.html'; // Redirect to login
+            } else {
+                // If still within 1 hour, redirect to dashboard
+                window.location.href = 'dashboard.html';
+            }
+        }
+    
+        // Auto-fill the saved password if available
+        const savedPassword = localStorage.getItem('savedPassword');
+        if (savedPassword) {
+            document.getElementById('login-password').value = savedPassword;
+            document.getElementById('save-password').checked = true; // Check the "Save Password" checkbox
+        }
+    
+
+
+
+  document.getElementById('loginForm').addEventListener('submit', function(e) {
+    e.preventDefault(); // Prevent default form submission
+
+    // Get the registered number (phone) and password from the login form
+    const loginPhone = document.getElementById('login-phone').value.trim();
+    const loginPassword = document.getElementById('login-password').value;
+
+    // Get registered users from localStorage
+    const registeredUsers = JSON.parse(localStorage.getItem('registeredUsers')) || [];
+
+    // Check if there are registered users
+    if (registeredUsers.length === 0) {
+        alert("No users registered. Please register before logging in.");
+        return; // Prevent further execution
+    }
+
+    // Validate login credentials
+    const user = registeredUsers.find(user => user.phone === loginPhone && user.password === loginPassword);
+
+    if (user) {
+        // Store logged-in user data in localStorage
+        localStorage.setItem('loggedInUser', loginPhone);
+        localStorage.setItem('loginTime', new Date().getTime());
+
+        // Store the registered number to localStorage
+        localStorage.setItem('registeredNumber', loginPhone);
+
+        // Show success message
+        const successMessage = document.getElementById('successMessage');
+        successMessage.style.display = 'block';
+
+        // Redirect to the Mine page after a short delay
+        setTimeout(() => {
+            window.location.href = 'mine.html';
+        }, 2000); // Adjust the delay (2000ms = 2 seconds)
+    } else {
+        // Show alert for invalid credentials
+        alert("Invalid phone number or password. Please try again.");
+
+        // Clear input fields for easier retry
+        document.getElementById('login-phone').value = '';
+        document.getElementById('login-password').value = '';
+
+        // Do not store any phone number in localStorage
+        localStorage.removeItem('registeredNumber'); // Ensure registered number is cleared
+    }
+});
+
+    
+    
+           
+        
+        
+    
+
+        
+        // Logout functionality (if needed on the same page)
+        const logoutLink = document.getElementById('logoutLink');
+        if (logoutLink) {
+            logoutLink.addEventListener('click', function(e) {
+                e.preventDefault(); // Prevent default link behavior
+    
+                // Clear user session
+                localStorage.removeItem('loggedInUser');
+                localStorage.removeItem('loginTime');
+                localStorage.removeItem('savedPassword'); // Optionally clear saved password when logging out
+    
+                alert("You have successfully logged out.");
+                window.location.href = 'login.html'; // Redirect to login page
+            });
+        }
+    </script>
+    
+
+    
+
+    <script src="scripts.js"></script>
+</body>
+</html>

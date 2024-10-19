@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Withdrawal</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+      
+        }
+      
+    
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 450px; /* Set maximum width for the container */
+            margin: auto; /* Center container */
+            background: #ffffff; /* White background */
+            padding: 30px; /* Inner padding */
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            text-align: left; /* Align text to the left */
+        }
+        
+        h1 {
+            font-size: 28px;
+            color: #333; /* Dark gray color for title */
+            margin-bottom: 20px; /* Space below title */
+            text-align: center; /* Center the title */
+            margin-top: -5px;
+            border-bottom: 1px solid #424242; /* Add underline effect */
+        }
+        
+        .account-balance,
+        .bank-account {
+            display: flex; /* Flexbox layout */
+            align-items: center; /* Center items vertically */
+            margin: 15px 0; /* Space between sections */
+        }
+        
+        .icon {
+            width: 30px; /* Adjust icon size */
+            height: 30px; /* Adjust icon size */
+            margin-right: 10px; /* Space between icon and text */
+        }
+        
+        
+        .balance,
+        .account-info {
+            font-size: 28px; /* Font size for balance and account info */
+            color: green;
+            font-weight: bold;
+            font-size: 28px;
+            margin-top: 8px;
+            margin-bottom: 6px;
+        }
+        
+        .form {
+            display: flex; /* Flexbox for form layout */
+            flex-direction: column; /* Vertical alignment */
+            margin-bottom: 10px; /* Space below form */
+        }
+        
+        .label {
+            display: flex; /* Flexbox for label */
+            align-items: center; /* Center items vertically */
+            margin-top: 15px; /* Space above labels */
+            color: #555; /* Medium gray color for label */
+            font-size: 16px; /* Font size for label */
+        }
+        .select-container {
+            margin-left: -141px; /* Space between label and select box */
+        }
+        
+        select {
+            margin-top: 70px; /* Move select box down from the label */
+            padding: 10px; /* Add padding for better appearance */
+            width: 165%;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        
+        
+        input {
+            padding: 10px; /* Padding inside inputs */
+            margin-top: 5px; /* Space above inputs */
+            border: 1px solid #ccc; /* Light gray border */
+            border-radius: 4px; /* Rounded corners */
+            font-size: 16px; /* Font size for inputs */
+            width: 70%; /* Full width for inputs */
+        }
+        
+        input:focus {
+            border-color: #007BFF; /* Border color on focus */
+            outline: none; /* Remove outline */
+        }
+        
+        .btn {
+            padding: 10px; /* Padding inside buttons */
+            background-color: #007BFF; /* Primary button color */
+            color: white; /* White text for button */
+            border: none; /* No border */
+            border-radius: 4px; /* Rounded corners */
+            cursor: pointer; /* Pointer cursor on hover */
+            font-size: 16px; /* Font size for button */
+            transition: background-color 0.3s; /* Transition effect */
+            width: 90%; /* Full width for button */
+            margin: 30px auto 0; /* Center button with top margin */
+        }
+        
+        .btn:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+        
+        .secondary {
+            background-color: #ffffff; /* Secondary button color */
+            color: black;
+            margin-bottom: 50px;
+        }
+        
+        .secondary:hover {
+            background-color: #ffffff; /* Darker gray on hover */
+            color: red;
+        }
+        
+        .message {
+            margin-top: -50px; /* Space above messages */
+            margin-bottom: 50px;
+            font-weight: bold; /* Bold text for messages */
+            color: #d9534f; /* Red color for error messages */
+        }
+        
+        .message.success {
+            color: #5cb85c; /* Green color for success messages */
+        }
+        
+        .instructions {
+            text-align: center; /* Center align instructions */
+            margin-top: 30px; /* Space above instructions */
+        }
+        
+        .instructions h2 {
+            font-size: 18px; /* Font size for instructions title */
+            color: #333; /* Dark gray color for title */
+        }
+        
+        .instructions ol {
+            padding-left: 20px; /* Indent ordered list */
+            color: #555; /* Medium gray color */
+            text-align: justify; /* Justify text */
+        }
+        
+        .instructions li {
+            margin-bottom: 10px; /* Space between list items */
+        }
+
+
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 1;
+            padding-top: 100px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+        }
+        
+        
+        .modal-content {
+            background-color: white;
+            margin: auto;
+            padding: 20px;
+            border-radius: 5px;
+            width: 50%;
+            text-align: center;
+        }
+
+        .footer {
+            background-color: hotpink;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            border-radius: 15px;
+        }
+        
+        .footer-icons {
+            display: flex;
+            justify-content: space-around;
+        }
+        
+        .footer-icon {
+            width: 40px; /* Adjust size as needed */
+            height: 40px; /* Adjust size as needed */
+        }
+        
+        
+   
+        #backgroundVideo {
+            position: fixed;
+            top: 0;
+            left: 0;
+            min-width: 100%;
+            min-height: 100%;
+            z-index: -1; /* Send the video to the background */
+            object-fit: cover; /* Ensure the video covers the entire screen */
+            filter: brightness(20%);  
+        }    
+        </style>
+
+        
+            <video autoplay muted loop id="backgroundVideo">
+                <source src="video-bg.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            
+    <div class="container">
+        <h1>Account Withdrawal</h1>
+    
+        <div class="account-balance">
+            <img src="mine-icon.png" alt="Account Balance Icon" class="icon"> <!-- Replace with actual icon path -->
+            <span class="balance">₱ 00.00</span>
+        </div>
+        <script>
+                // Assuming the balance is fetched from the backend
+                window.onload = function() {
+                    fetchBalanceFromBackend();
+                };
+                
+                function fetchBalanceFromBackend() {
+                    // Use fetch to get the balance from the backend (replace '/api/get-balance' with your actual API URL)
+                    fetch('/api/get-balance')
+                        .then(response => response.json())
+                        .then(data => {
+                            // Assuming the response contains a 'balance' field
+                            let accountBalance = data.balance;
+                            document.querySelector('.balance').textContent = `₱ ${accountBalance.toFixed(2)}`;
+                        })
+                        .catch(error => {
+                            console.error('Error fetching balance:', error);
+                        });
+                }
+                </script>
+                
+    
+    
+        <div class="bank-account">
+            <img src="bank-account-type.png" alt="Bank Account Icon" class="icon"> <!-- Replace with actual icon path -->
+            <label for="accountTypeInput">Bank Account:</label>
+            <div class="select-container">
+                <select id="accountTypeInput" required>
+                    <option value="gcash">GCash</option>
+                    <option value="paypal">PayPal</option>
+                </select>
+            </div>
+        </div>
+        
+        
+    
+        <form id="withdrawForm" class="form" onsubmit="processWithdrawal(event)">
+            <div class="form-group">
+                <label for="withdrawAmount" class="label">
+                    <img src="withdrawal-amount.png" alt="Withdrawal Amount Icon" class="icon"> <!-- Replace with actual icon path -->
+                    Withdrawal Amount:
+                </label>
+                <input type="number" id="withdrawAmount" required placeholder="Enter withdrawal amount">
+            </div>
+            <script>
+                document.getElementById("withdrawAmount").addEventListener("input", function () {
+                    this.value = this.value.replace(/[^0-9.]/g, ''); // Allow only digits and decimal point
+                });
+            </script>
+
+
+
+           
+        
+            
+            <div class="form-group">
+                <label for="fundPassword" class="label">
+                    <img src="withdrawal-password.png" alt="Fund Password Icon" class="icon"> <!-- Replace with actual icon path -->
+                    Fund Password:
+                </label>
+                <input type="password" id="fundPassword" required placeholder="Enter your fund password">
+            </div>
+    
+            <button type="submit" class="btn">Withdraw Funds Instantly</button>
+        </form>
+    
+    
+        <div class="instructions">
+            <h2>Instructions:</h2>
+            <ol>
+                <li>Withdrawal time is Monday to Friday (10:00 AM - 6:00 PM).</li>
+                <li>The minimum withdrawal limit is ₱100.00, and withdrawal is made once a day (10% product maintenance fee and tax).</li>
+                <li>Withdrawal time: arrive within 10 to 60 minutes. If the withdrawal fails, please contact online customer service.</li>
+                <li>To avoid withdrawal failure, please try to keep the withdrawal amount above ₱101 when withdrawing money.</li>
+                <li>In order to verify the authenticity of the user, you must purchase VeilVest products to activate the withdrawal function.</li>
+            </ol>
+        </div>
+
+        <!-- Modal for showing withdrawal processing -->
+        <div id="withdrawalModal" class="modal">
+            <div class="modal-content">
+                <h3>Withdrawal Status</h3>
+                <p id="withdrawalMessage"></p>
+                <button onclick="closeModal()" class="btn">Close</button>
+            </div>
+        </div>
+
+        <button id="viewWithdrawalsButton" class="btn secondary" onclick="viewWithdrawalRecords()">View Withdrawal Records</button>
+    </div>
+
+
+
+    
+   
+    <footer class="footer">
+        <div class="footer-icons">
+            <a href="dashboard.html" class="footer-item">
+                <img src="home-icon.png" alt="Home" class="footer-icon">
+                <span class="icon-label">Home</span>
+            </a>
+            <a href="invest.html" class="footer-item">
+                <img src="invest-icon.png" alt="Invest" class="footer-icon">
+                <span class="icon-label">Invest</span>
+            </a>
+            <a href="teams.html" class="footer-item">
+                <img src="team-icon.png" alt="Teams" class="footer-icon">
+                <span class="icon-label">Teams</span>
+            </a>
+            <a href="mine.html" id="logoutLink" class="footer-item">
+                <img src="mine-icon.png" alt="Mine" class="footer-icon">
+                <span class="icon-label">Mine</span>
+            </a>
+        </div>
+    </footer>
+    <style>
+        .footer {
+            background-color: rgba(0, 128, 0, 0.3); /* Semi-transparent green for glass effect */
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            border-radius: 15px;
+            backdrop-filter: blur(10px); /* Frosted glass blur effect */
+            box-shadow: 0 4px 10px rgba(0, 255, 0, 0.4), 0 2px 20px rgba(0, 128, 0, 0.6); /* Green glowing effect */
+            border: 1px solid rgba(255, 255, 255, 0.2); /* Light border for glass effect */
+            transition: box-shadow 0.3s ease; /* Smooth transition effect */
+        }
+        
+        .footer:hover {
+            box-shadow: 0 6px 15px rgba(0, 255, 0, 0.6), 0 4px 25px rgba(0, 128, 0, 0.8); /* Brighter shine on hover */
+        }
+        
+        .footer-icons {
+            display: flex;
+            justify-content: space-around;
+        }
+        
+        .footer-item {
+            display: flex;
+            flex-direction: column; /* Stack icon and label vertically */
+            align-items: center; /* Center the icon and label */
+            text-decoration: none; /* Remove underline from links */
+        }
+        
+        .footer-icon {
+            width: 40px;
+            height: 40px;
+            filter: brightness(0) invert(1); /* Make the icon white */
+        }
+        
+        .icon-label {
+            color: white; /* White text for the labels */
+            font-size: 14px; /* Adjust size of the label text */
+            margin-top: 5px; /* Space between icon and label */
+        }
+    </style>
+    
+    
+    <script src="script.js"></script> <!-- Link to JavaScript -->
+</body>
+</html>
